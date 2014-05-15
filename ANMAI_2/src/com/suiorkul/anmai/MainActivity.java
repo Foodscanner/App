@@ -3,7 +3,7 @@ package com.suiorkul.anmai;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+//import android.support.v4.app.Fragment;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.DialogInterface.OnClickListener;
