@@ -16,4 +16,6 @@
               <item >Phenylalanine</item>
                <item >Salt</item>
     </string-array>
+    <string name="description">Beschreibung:</string>
+      
 </resources>

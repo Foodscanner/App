@@ -1,7 +1,6 @@
 package se.app.anmai;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,22 +27,19 @@ import deserializer.StandardExchangeArticle;
  */
 public class ServerRequest {
 
-
 	public static final String serverURL = "http://foodserver.cloudapp.net/ANMAIServer/ProductInformation.xml?ean=";
 	// if does not work: use "http://192.168.0.1/test.php"
 
-	private String barcode;
 	private ResultActivity ac;
 	private static final String DEBUG_TAG = "HttpConnection";
 
 	public ServerRequest(String barcode, ResultActivity ac) {
 		this.ac = ac;
-		this.barcode = barcode;
 		ConnectivityManager connMgr = (ConnectivityManager) this.ac
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {
-			new DataBaseRequest().execute(serverURL+barcode);
+			new DataBaseRequest().execute(serverURL + barcode);
 		} else {
 			Toast.makeText(this.ac, "No network connection available.",
 					Toast.LENGTH_SHORT).show();
@@ -53,7 +49,7 @@ public class ServerRequest {
 	/**
 	 * String - type of input Void - empty String - type of output
 	 * 
-	 * @author 111
+	 * @author Sergej Gorr
 	 * 
 	 */
 	private class DataBaseRequest extends
@@ -89,55 +85,39 @@ public class ServerRequest {
 
 	private StandardExchangeArticle downloadArticleInfo(String myurl)
 			throws IOException {
-		InputStream is = null;
 
+		StandardExchangeArticle exa = null;
 		try {
 			URL url = new URL(myurl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("POST");
-			conn.setDoInput(true);
-			conn.setDoOutput(true);
-			//MIME_TYPE taking from http://de.selfhtml.org/diverses/mimetypen.htm
-			conn.setRequestProperty("Content-Type",
-					"application/xml");
-			conn.setConnectTimeout(15000 /* milliseconds */);
-			conn.setRequestProperty("charset", "utf-8");
-			conn.connect();
-			DataOutputStream writer;
 
-			writer = new DataOutputStream(conn.getOutputStream());
-			writer.writeBytes(this.barcode);
-			writer.flush();
-			writer.close();
+			StringBuffer stringbuffer = new StringBuffer();
+			String line = null;
+			BufferedReader bufferReader = null;
 
-			// Starts the query
+			bufferReader = new BufferedReader(new InputStreamReader(
+					conn.getInputStream()));
+			while ((line = bufferReader.readLine()) != null) {
+				stringbuffer.append(line);
+			}
 
-//			int response = conn.getResponseCode();
-			is = conn.getInputStream();
+			String contentAsString = stringbuffer.toString();
+			Log.d(DEBUG_TAG, "Result " + contentAsString);
+			// =contentAsString;
+			exa = Deserializer.deserializeStandardArticle(contentAsString);
 
-			// Convert the InputStream into a string
-			String contentAsString = readIt(is);
-			Log.d(DEBUG_TAG, "InputStream's content: " + contentAsString);
-			StandardExchangeArticle article = Deserializer
-					.deserializeStandardArticle(contentAsString);
+			Log.d(DEBUG_TAG, "Description " + exa.getDescription());
+			Log.d(DEBUG_TAG, "Name " + exa.getName());
+			Log.d(DEBUG_TAG, "URL " + exa.getPictureURI());
+			Log.d(DEBUG_TAG, "FLAGS " + exa.getFlags().toString());
 
 			if (conn != null) {
 				conn.disconnect();
 			}
-			// Article
-			if (article == null)
-				article = new StandardExchangeArticle();
-			return article;
 
-			// Makes sure that the InputStream is closed after the app is
-			// finished using it.
-
-		} finally {
-			if (is != null) {
-				is.close();
-			}
-
+		} catch (Exception ex) {
 		}
+		return exa;
 	}
 
 	public String readIt(InputStream stream) throws IOException,
