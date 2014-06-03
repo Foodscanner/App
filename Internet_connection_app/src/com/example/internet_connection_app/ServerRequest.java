@@ -97,17 +97,20 @@ private Article downloadArtInfo(String myurl) throws IOException {
        bufferReader=new BufferedReader(new InputStreamReader(conn.getInputStream()));
        while((line=bufferReader.readLine())!=null)  
        {                 
-           stringbuffer.append(line);  
+           //System.out.println(line);
+    	   stringbuffer.append(line);  
        }  
 
        String contentAsString = stringbuffer.toString();
-       Log.d(DEBUG_TAG, "Result "+ contentAsString);
+//       Log.d(DEBUG_TAG, "Result "+ contentAsString);
 //       =contentAsString;
        StandardExchangeArticle ex = Deserializer.deserializeStandardArticle(contentAsString);
        art._description = ex.getDescription();
        Log.d(DEBUG_TAG, "Description "+ ex.getDescription());
        Log.d(DEBUG_TAG, "Name "+ ex.getName());
        Log.d(DEBUG_TAG, "URL " + ex.getPictureURI());
+       Log.d(DEBUG_TAG, "FLAGS " + ex.getFlags().toString());
+
        System.out.println(ex.getName());
        if(conn !=null){
     	   conn.disconnect();

@@ -1,5 +1,6 @@
 package deserializer;
 
+import java.io.Serializable;
 import java.net.URI;
 import java.util.HashMap;
 
@@ -11,10 +12,11 @@ import java.util.HashMap;
  * 
  */
 public class StandardExchangeArticle {
+
 	private long ID;
 	private String name;
 	private String description;
-	private URI pictureURI;
+	private URI pictureURL;
 	private HashMap<Integer, String> flags;
 
 	// initialized flags to prevent null pointer exception
@@ -47,11 +49,11 @@ public class StandardExchangeArticle {
 	}
 
 	public URI getPictureURI() {
-		return pictureURI;
+		return pictureURL;
 	}
 
 	public void setPictureURI(URI pictureURI) {
-		this.pictureURI = pictureURI;
+		this.pictureURL = pictureURI;
 	}
 
 	public HashMap<Integer, String> getFlags() {
