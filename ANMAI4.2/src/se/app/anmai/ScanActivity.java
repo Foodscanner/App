@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -91,13 +92,12 @@ public class ScanActivity extends Activity {
 			i.putExtra(BARCODE_TYPE_EXTRA, typ);
 			startActivity(i);
 
-			// EditText etBarcode = (EditText) findViewById(R.id.etBarcode);
-			// EditText etTyp = (EditText) findViewById(R.id.etTyp);
-			//
-			// etBarcode.setText(barcode.toString());
-			// etTyp.setText(typ.toString());
 
 		}
 	}
-
+   @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+	// TODO Auto-generated method stub
+	return super.onKeyDown(keyCode, event);
+}
 }

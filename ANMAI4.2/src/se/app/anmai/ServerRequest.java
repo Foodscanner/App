@@ -28,8 +28,9 @@ import deserializer.StandardExchangeArticle;
 public class ServerRequest {
 
 	public static final String serverURL = "http://foodserver.cloudapp.net/ANMAIServer/ProductInformation.xml?ean=";
-	// if does not work: use "http://192.168.0.1/test.php"
-
+    
+	//TestEAN
+    //	private final String testEAN= "3045320092066";
 	private ResultActivity ac;
 	private static final String DEBUG_TAG = "HttpConnection";
 
@@ -40,6 +41,8 @@ public class ServerRequest {
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {
 			new DataBaseRequest().execute(serverURL + barcode);
+//			new DataBaseRequest().execute(serverURL+testEAN);
+
 		} else {
 			Toast.makeText(this.ac, "No network connection available.",
 					Toast.LENGTH_SHORT).show();

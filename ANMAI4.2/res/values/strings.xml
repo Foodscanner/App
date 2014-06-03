@@ -17,5 +17,8 @@
                <item >Salt</item>
     </string-array>
     <string name="description">Beschreibung:</string>
+    <string name="article">Artikel:</string>
+    <string name="error_message">Artikel ist nicht gefunden</string>
+    
       
 </resources>

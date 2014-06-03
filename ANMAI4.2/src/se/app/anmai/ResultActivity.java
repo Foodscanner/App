@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import deserializer.StandardExchangeArticle;
@@ -25,7 +26,7 @@ import deserializer.StandardExchangeArticle;
 public class ResultActivity extends Activity {
 	
     TextView art_title;
-    ImageView article_image;
+    FrameLayout article_image;
     private static final String TESTURL = "3045320092066";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class ResultActivity extends Activity {
 		setContentView(R.layout.main_articleinfo_layout);
 		
 		art_title=(TextView) findViewById(R.id.article_title);
-		article_image = (ImageView) findViewById(R.id.article_image);
+		article_image = (FrameLayout) findViewById(R.id.article_image);
 		Bundle dataIntent = getIntent().getExtras();
         String barcode = dataIntent.getString(ScanActivity.BARCODE_EXTRA);
         art_title.setText(barcode.toString());
@@ -49,7 +50,10 @@ public class ResultActivity extends Activity {
     }
     
     public void fillArticleInfo(StandardExchangeArticle article){
-    	((TextView) findViewById(R.id.article_title)).setText(article.getName());   	
+    	((TextView) findViewById(R.id.article_title)).setText(article.getName());
+    	((TextView) findViewById(R.id.description_content)).setText(article.getDescription());
+        final View searchingLayout = findViewById(R.id.searching_layout);
+        searchingLayout.setVisibility(View.GONE);
 		final View v = findViewById(R.id.article_info_layout);
 		v.setVisibility(View.VISIBLE);
     }
