@@ -4,38 +4,45 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-
+/**
+ * 
+ * @author Sergej Gorr
+ * @author Siourkul Zhooshbaev
+ *
+ */
 public class ScanActivity extends Activity {
 
 	private String[] flagcontent;
-	private boolean[] flagvalues;
+	
 	public static final String PERSFLAGS = "flags";
 	private ListView listView;
-
+    private static final String tag ="DEBUG_SCANACTIVITY";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.linearlay);
 		flagcontent = this.getResources().getStringArray(R.array.nameOfFlags);
-		flagvalues = getFlagesValues();
 		listView = (ListView) findViewById(R.id.listView1);
-		listView.setOnScrollListener(listViewListener);
-		ArrayAdapter<String> adapter = new ListViewAdapter(this, flagcontent,
-				this, flagvalues);
+		ArrayAdapter<String> adapter = new ListViewAdapter(this, flagcontent);
 		listView.setAdapter(adapter);
+      
 	}
-
-	private boolean[] getFlagesValues() {
+    private boolean getFlagstate(String flag){
+		SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+    	return prefs.getBoolean(flag, false);
+    }
+	private boolean[] getFlagsValues() {
 		boolean[] flagstates = new boolean[flagcontent.length];
 		SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 		for (int i = 0; i < flagcontent.length; i++) {
-			flagstates[i] = prefs.getBoolean(flagcontent[i], false);
+			boolean state = prefs.getBoolean(flagcontent[i], false);
+			flagstates[i] = state;
+			Log.d(tag, "FLAG "+ flagcontent[i] +" is set to " + state);
 		}
 		return flagstates;
 	}
@@ -68,22 +75,7 @@ public class ScanActivity extends Activity {
 		integrator.initiateScan();
 	}
 
-	private OnScrollListener listViewListener = new OnScrollListener() {
 
-		@Override
-		public void onScrollStateChanged(AbsListView arg0, int arg1) {
-
-		}
-
-		@Override
-		public void onScroll(AbsListView view, int firstVisibleItem,
-				int visibleItemCount, int totalItemCount) {
-			System.out.println("   visible items  " + visibleItemCount);
-			System.out.println(" all items: " + totalItemCount);
-			System.out.println("all listitems " + view.getChildCount());
-			System.out.println(" first visible item " + firstVisibleItem);
-		}
-	};
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		IntentResult scanResult = IntentIntegrator.parseActivityResult(
