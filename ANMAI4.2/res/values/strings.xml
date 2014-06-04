@@ -12,13 +12,13 @@
           <item >Sugar</item>
            <item >Strawberries</item>
             <item >Peanuts</item>
-             <item >Sugar</item>
               <item >Phenylalanine</item>
                <item >Salt</item>
     </string-array>
     <string name="description">Beschreibung:</string>
     <string name="article">Artikel:</string>
     <string name="error_message">Artikel ist nicht gefunden</string>
+    <string name="product_containt">Der Artikel enthält:</string>
     
       
 </resources>

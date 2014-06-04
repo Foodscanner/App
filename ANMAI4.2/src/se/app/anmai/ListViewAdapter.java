@@ -42,7 +42,7 @@ public class ListViewAdapter extends ArrayAdapter<String> {
 		}
 		CheckBox checkBox = (CheckBox) rowView.findViewById(R.id.flag_value);
 		SharedPreferences sP = ((Activity) context)
-				.getPreferences(ScanActivity.MODE_PRIVATE);
+				.getSharedPreferences(ScanActivity.flags_file,ScanActivity.MODE_PRIVATE);
 		boolean state = sP.getBoolean(flags[position], false);
 
 		// checkBox.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +64,7 @@ public class ListViewAdapter extends ArrayAdapter<String> {
 					boolean isChecked) {
 
 				SharedPreferences.Editor editor = ((Activity) context)
-						.getPreferences(ScanActivity.MODE_PRIVATE).edit();
+						.getSharedPreferences(ScanActivity.flags_file,ScanActivity.MODE_PRIVATE).edit();
 				Log.d(tag, "Flag " + flags[position]
 						+ " is changed manually to " + isChecked);
 				editor.putBoolean(flags[position], isChecked);

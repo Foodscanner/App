@@ -29,33 +29,25 @@ public class ScanActivity extends Activity {
 	private static final String tag = "DEBUG_SCANACTIVITY";
 	public static final String BARCODE_EXTRA = "BARCODE";
 	public static final String BARCODE_TYPE_EXTRA = "BARCODE_TYPE";
-
+    public static final String flags_file = "flagsfile";
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.linearlay);
 		flagcontent = this.getResources().getStringArray(R.array.nameOfFlags);
-		listView = (ListView) findViewById(R.id.listView1);
+		listView = (ListView) findViewById(R.id.resultflags_listview);
 		ArrayAdapter<String> adapter = new ListViewAdapter(this, flagcontent);
 		listView.setAdapter(adapter);
 
 	}
 
-	private boolean getFlagstate(String flag) {
+	public boolean getFlagstate(String flag) {
 		SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 		return prefs.getBoolean(flag, false);
 	}
 
-	private boolean[] getFlagsValues() {
-		boolean[] flagstates = new boolean[flagcontent.length];
-		SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-		for (int i = 0; i < flagcontent.length; i++) {
-			boolean state = prefs.getBoolean(flagcontent[i], false);
-			flagstates[i] = state;
-			Log.d(tag, "FLAG " + flagcontent[i] + " is set to " + state);
-		}
-		return flagstates;
-	}
+	
 
 	/**
 	 * checks the internet connection 

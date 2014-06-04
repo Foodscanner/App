@@ -11,6 +11,7 @@ public class Deserializer {
 		try {
 			sea = (StandardExchangeArticle) deserializer.fromXML(xml);
 		} catch (Exception ex) {
+			return sea;
 		}
 		System.out.println("sea: " + sea);
 		return sea;

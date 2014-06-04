@@ -71,7 +71,7 @@ public class ServerRequest {
 		@Override
 		protected void onPostExecute(StandardExchangeArticle result) {
 			ac.fillArticleInfo(result);
-			if (result.getPictureURI() != null) {
+			if (result !=null && result.getPictureURI() != null) {
 				new ImageDowloader().execute(result.getPictureURI().toString());
 			}
 		}
@@ -108,17 +108,18 @@ public class ServerRequest {
 			Log.d(DEBUG_TAG, "Result " + contentAsString);
 			// =contentAsString;
 			exa = Deserializer.deserializeStandardArticle(contentAsString);
-
+            if(exa!=null){
 			Log.d(DEBUG_TAG, "Description " + exa.getDescription());
 			Log.d(DEBUG_TAG, "Name " + exa.getName());
 			Log.d(DEBUG_TAG, "URL " + exa.getPictureURI());
 			Log.d(DEBUG_TAG, "FLAGS " + exa.getFlags().toString());
-
+            }
 			if (conn != null) {
 				conn.disconnect();
 			}
 
 		} catch (Exception ex) {
+			return exa;
 		}
 		return exa;
 	}

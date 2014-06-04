@@ -22,7 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-          <activity android:name="se.app.anmai.ResultActivity">
+          <activity android:name="se.app.anmai.ResultActivity"
+           android:screenOrientation="portrait"
+           android:configChanges="keyboardHidden|orientation|screenSize">
             
         </activity>
     </application>
