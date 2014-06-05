@@ -4,5 +4,13 @@
     <string name="app_name">Internet_connection_app</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-
+      <string-array name="flags">
+        <item >Lactose</item>
+         <item >Gluten</item>
+          <item >Sugar</item>
+           <item >Strawberries</item>
+            <item >Peanuts</item>
+              <item >Phenylalanine</item>
+               <item >Salt</item>
+    </string-array>
 </resources>
