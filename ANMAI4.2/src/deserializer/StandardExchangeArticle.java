@@ -11,65 +11,75 @@ import java.util.HashMap;
  * 
  */
 public class StandardExchangeArticle {
+private long ID;
+private String name;
+private String description;
+private String pictureURL;
+private HashMap<Integer, String> flags;
+private HashMap<Integer,String> ingredients;
 
-	private long ID;
-	private String name;
-	private String description;
-	private URI pictureURL;
-	private HashMap<Integer, String> flags;
+//initialized flags to prevent null pointer exception
+public StandardExchangeArticle(){
+ flags = new HashMap<Integer,String>();
+ ingredients = new HashMap<Integer,String>();
+}
 
-	// initialized flags to prevent null pointer exception
-	public StandardExchangeArticle() {
-		flags = new HashMap<Integer, String>();
-	}
+public long getID() {
+	return ID;
+}
+public void setID(long iD) {
+	ID = iD;
+}
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
+public String getDescription() {
+	return description;
+}
+public void setDescription(String description) {
+	this.description = description;
+}
+public String getPictureURL() {
+	return pictureURL;
+}
+public void setPictureURL(String pictureURL) {
+	this.pictureURL = pictureURL;
+}
+public HashMap<Integer, String> getFlags() {
+	return flags;
+}
 
-	public long getID() {
-		return ID;
-	}
+public HashMap<Integer, String> getIngredients() {
+	return ingredients;
+}
+public void clearFlags() {
+	this.flags = new HashMap<Integer,String>();;
+}
 
-	public void setID(long iD) {
-		ID = iD;
-	}
+public void addFlag(Integer id, String flag){
+	flags.put(id, flag);
+}
 
-	public String getName() {
-		return name;
-	}
+public void removeFlag(Integer id){
+	flags.remove(id);
+}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+/**
+ * @return the ingredients
+ */
+public void removeIngredient(Integer id) {
+	ingredients.remove(id);
+}
 
-	public String getDescription() {
-		return description;
-	}
+/**
+ * @param ingredients the ingredients to set
+ */
+public void addIngredient(Integer id,String ingredient) {
+	this.ingredients.put(id, ingredient);
+}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public URI getPictureURI() {
-		return pictureURL;
-	}
-
-	public void setPictureURI(URI pictureURI) {
-		this.pictureURL = pictureURI;
-	}
-
-	public HashMap<Integer, String> getFlags() {
-		return flags;
-	}
-
-	public void clearFlags() {
-		this.flags = new HashMap<Integer, String>();
-		;
-	}
-
-	public void addFlag(Integer id, String flag) {
-		flags.put(id, flag);
-	}
-
-	public void removeFlag(Integer id) {
-		flags.remove(id);
-	}
 
 }

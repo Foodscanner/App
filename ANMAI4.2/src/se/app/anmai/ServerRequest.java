@@ -71,15 +71,15 @@ public class ServerRequest {
 		@Override
 		protected void onPostExecute(StandardExchangeArticle result) {
 			ac.fillArticleInfo(result);
-			if (result !=null && result.getPictureURI() != null) {
-				new ImageDowloader().execute(result.getPictureURI().toString());
+			if (result !=null && result.getPictureURL() != null) {
+				new ImageDowloader().execute(result.getPictureURL());
 			}
 		}
 	}
 
 	/**
 	 * Given a URL, establishes an HttpUrlConnection and retrieves the web page
-	 * content as a InputStream, which it returns as a string.
+	 * content as a InputStream, which it returns as a StandardExchangeArticle.
 	 * 
 	 * @param myurl
 	 * @return
@@ -111,7 +111,7 @@ public class ServerRequest {
             if(exa!=null){
 			Log.d(DEBUG_TAG, "Description " + exa.getDescription());
 			Log.d(DEBUG_TAG, "Name " + exa.getName());
-			Log.d(DEBUG_TAG, "URL " + exa.getPictureURI());
+			Log.d(DEBUG_TAG, "URL " + exa.getPictureURL());
 			Log.d(DEBUG_TAG, "FLAGS " + exa.getFlags().toString());
             }
 			if (conn != null) {

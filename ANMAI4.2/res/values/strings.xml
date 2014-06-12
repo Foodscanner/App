@@ -7,13 +7,18 @@
     <string name="etTyp">Type</string>
     <string name="etBarcode">Barcode</string>
       <string-array name="nameOfFlags">
-        <item >Lactose</item>
-         <item >Gluten</item>
-          <item >Sugar</item>
-           <item >Strawberries</item>
-            <item >Peanuts</item>
-              <item >Phenylalanine</item>
-               <item >Salt</item>
+        <item >Not Kosher</item>
+         <item >Gelatin</item>
+          <item >Lactose</item>
+           <item >Gluten</item>
+            <item >Sugar</item>
+              <item >Emulgator</item> 
+              <item >Strawberries</item>
+               <item >Acidifier</item>
+                <item >Peanuts</item>
+                  <item >Almonds</item>
+                    <item >Nuts</item>
+                     <item >Glucose Syrup</item>
     </string-array>
     <string name="description">Beschreibung:</string>
     <string name="article">Artikel:</string>
